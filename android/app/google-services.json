@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "901424431008",
+    "project_id": "authtoba",
+    "storage_bucket": "authtoba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901424431008:android:c9cb348ba36802cbe26ec5",
+        "android_client_info": {
+          "package_name": "com.example.login_register_toba"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIvZyLj9WETeGRclL0Qb96qnACgLrKS0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
