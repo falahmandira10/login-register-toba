@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_register_toba/pages/auth_page.dart';
+import 'package:login_register_toba/pages/login_page.dart';
 // import 'package:login_register_toba/pages/login_page.dart';
 import 'package:login_register_toba/pages/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Register(),
+      home: LoginPage(),
     );
   }
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:login_register_toba/pages/appbar.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterPageState extends State<RegisterPage> {
   bool ok = true;
   bool flag = true;
 
@@ -16,6 +16,8 @@ class _RegisterState extends State<Register> {
   final firstnameController = TextEditingController();
   final lastnameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void signUp() {}
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +159,9 @@ class _RegisterState extends State<Register> {
                         height: 50,
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            signUp();
+                          },
                           child: Text(
                             "REGISTER",
                             style: TextStyle(

@@ -1,20 +1,38 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:login_register_toba/pages/appbar.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginPageState extends State<LoginPage> {
   bool ok = true;
   bool flag = true;
-  var check = Icon(Icons.check_box_outline_blank);
+  bool? isChecked = false;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +55,8 @@ class _LoginState extends State<Login> {
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 0, 30),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(20, 10, 0, 30),
                 child: Text(
                   "Welcome \nBack!",
                   style: TextStyle(
@@ -50,7 +68,7 @@ class _LoginState extends State<Login> {
               ),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
@@ -58,7 +76,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: ListView(children: [
                       Image.asset(
                           "assets/images/undraw_Ordinary_day_re_v5hy_1.png",
@@ -67,7 +85,10 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset("assets/images/logo_1.png"),
-                          Text(" Account")
+                          Text(
+                            " Account",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )
                         ],
                       ),
                       Container(
@@ -116,34 +137,31 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    if (flag) {
-                                      check = Icon(Icons.check_box_outlined);
-                                      flag = false;
-                                      return;
-                                    }
-                                    check = Icon(Icons.check_box_outline_blank);
-                                  },
-                                  icon: check),
-                              Text(
-                                "Remember me",
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                          Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                                color: Color(0xFF527EE7),
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: isChecked,
+                                  onChanged: (bool? value) => isChecked = value,
+                                ),
+                                const Text(
+                                  "Remember me",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            const Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                  color: Color(0xFF527EE7),
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 10,
@@ -153,7 +171,9 @@ class _LoginState extends State<Login> {
                         height: 50,
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            signIn();
+                          },
                           child: Text(
                             "LOGIN",
                             style: TextStyle(
