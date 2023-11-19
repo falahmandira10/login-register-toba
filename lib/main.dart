@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login_register_toba/pages/auth_page.dart';
-import 'package:login_register_toba/pages/login_page.dart';
-// import 'package:login_register_toba/pages/login_page.dart';
-import 'package:login_register_toba/pages/register_page.dart';
+import 'package:get/get.dart';
+import 'package:login_register_toba/screens/auth_page.dart';
+import 'package:login_register_toba/screens/login_page.dart';
+// import 'package:login_register_toba/screens/login_page.dart';
+import 'package:login_register_toba/screens/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -20,8 +21,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginPage(),
+    return GetMaterialApp(
+      initialRoute: '/regis',
+      getPages: [
+        GetPage(name: '/regis', page: () => const RegisterPage()),
+        GetPage(
+            name: '/login',
+            page: () => const LoginPage(),
+            transition: Transition.noTransition),
+      ],
+      debugShowCheckedModeBanner: false,
     );
   }
 }

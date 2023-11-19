@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_register_toba/pages/home_page.dart';
-import 'package:login_register_toba/pages/login_page.dart';
-import 'package:login_register_toba/pages/register_page.dart';
+import 'package:login_register_toba/screens/home_page.dart';
+import 'package:login_register_toba/screens/login_page.dart';
+import 'package:login_register_toba/screens/register_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

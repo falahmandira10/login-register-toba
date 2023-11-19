@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:login_register_toba/pages/appbar.dart';
+import 'package:get/get.dart';
+import 'package:login_register_toba/bar_items/appbar.dart';
+import 'package:login_register_toba/screens/home_page.dart';
+import 'package:login_register_toba/screens/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,21 +21,21 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the
-    // widget tree.
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // Clean up the controller when the widget is removed from the
+  //   // widget tree.
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
 
-  void signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
-  }
+  // void signIn() async {
+  //   await FirebaseAuth.instance.signInWithEmailAndPassword(
+  //     email: emailController.text,
+  //     password: passwordController.text,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                               children: [
                                 Checkbox(
                                   value: isChecked,
-                                  onChanged: (bool? value) => isChecked = value,
+                                  activeColor: Color(0xFF527EE7),
+                                  // tristate: true,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      isChecked = newValue;
+                                    });
+                                  },
                                 ),
                                 const Text(
                                   "Remember me",
@@ -172,7 +181,8 @@ class _LoginPageState extends State<LoginPage> {
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: ElevatedButton(
                           onPressed: () {
-                            signIn();
+                            // signIn();
+                            Get.off(HomePage());
                           },
                           child: Text(
                             "LOGIN",
@@ -197,7 +207,10 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text("Not a member?"),
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.toNamed('/regis',
+                                    arguments: RegisterPage());
+                              },
                               child: Text(
                                 "Register",
                                 style: TextStyle(
